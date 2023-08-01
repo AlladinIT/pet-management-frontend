@@ -1,0 +1,61 @@
+<div class="card my-5">
+    <div class="card-body">
+    <div class="alert alert-danger text-center" *ngIf="message">{{ message }}</div>
+      <form (ngSubmit)="onSubmit()" #petForm="ngForm">
+
+        <h2 class="text-center" *ngIf="petId != null; else addPetHeading">Edit Pet</h2>
+        <ng-template #addPetHeading>
+          <h2 class="text-center">Add New Pet</h2>
+        </ng-template>
+
+        <div class="form-group">
+          <label for="name">Pet name <span style="color: red;">*</span></label>
+          <input type="text" [(ngModel)]="pet.name"
+            class="form-control" 
+            id="name" 
+            name="name" 
+            placeholder="Enter pet name"
+            required #name="ngModel">
+        </div>
+        <div *ngIf="!name.value" class="alert alert-danger">Pet name is required</div>
+
+        <div class="form-group">
+          <label for="code">Code <span style="color: red;">*</span></label>
+          <input type="text" [(ngModel)]="pet.code" (input)="onInput($event)" pattern="[0-9]*"
+            class="form-control" 
+            id="code" 
+            name="code" 
+            placeholder="Enter Pet code"
+            required #code="ngModel">
+          <div *ngIf="!code.value" class="alert alert-danger">Pet code is required</div>
+        </div>
+
+        <div class = "form-group">
+            <label for="typeId">Select a type: <span style="color: red;">*</span></label>
+            <select id="typeId" name="typeId" [(ngModel)]="pet.typeId"  class="form-control" required>
+              <option *ngFor="let type of types" [value]="type.id">{{ type.type }}</option>
+            </select>
+        </div>
+
+        <div class = "form-group">
+            <label for="colorId">Select a color: <span style="color: red;">*</span></label>
+            <select id="colorId" name="colorId" [(ngModel)]="pet.colorId"  class="form-control" required>
+              <option *ngFor="let color of colors" [value]="color.id">{{ color.color }}</option>
+            </select>
+        </div>
+
+        <div class = "form-group">
+            <label for="countryId">Select a country (Optional): </label>
+            <select id="countryId" name="countryId" [(ngModel)]="pet.countryId"  class="form-control">
+              <option value="" selected></option>
+              <option *ngFor="let country of countries" [value]="country.id">{{ country.country }}</option>
+            </select>
+        </div>
+
+        <button type="submit" [disabled]="!petForm.form.valid" 
+          class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+

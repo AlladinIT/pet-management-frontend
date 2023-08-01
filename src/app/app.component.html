@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-dark my-5">
+        <div class="card-body">
+          <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
+          <ul class="text-center list-inline py-3">
+
+            <!-- Links for logged-in users -->
+            <div *ngIf="isLoggedIn">
+              <li class="list-inline-item">
+                <a routerLink="/mypets" class="btn btn-info">My pets</a>
+              </li>
+              <li class="list-inline-item">
+                <a routerLink="/addPet" class="btn btn-info">Add pet</a>
+              </li>
+              <li class="list-inline-item">
+                <a routerLink="/logout" class="btn btn-info">Logout</a>
+              </li>
+            </div>
+            <!-- Links for users who are not logged in -->
+            <div *ngIf="!isLoggedIn">
+              <li class="list-inline-item">
+                <a routerLink="/register" class="btn btn-info">Register</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a routerLink="/users" class="btn btn-info">All users</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a routerLink="/login" class="btn btn-info">Login</a>
+              </li>
+            </div>
+
+          </ul>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
+
+
+
